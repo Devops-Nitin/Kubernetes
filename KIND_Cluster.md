@@ -15,30 +15,30 @@ Create a kind-config.yaml file:
 
 
 kind: Cluster
-
 apiVersion: kind.x-k8s.io/v1alpha4
+name: nks-cluster
 
 nodes:
+- role: control-plane
+  image: kindest/node:v1.35.0
+  extraPortMappings:
+    - containerPort: 80
+      hostPort: 80
+      protocol: TCP
 
-&#x20; - role: control-plane
+- role: worker
+  image: kindest/node:v1.35.0
 
-&#x20;   image: kindest/node:v1.35.1
-
-&#x20; - role: worker
-
-&#x20;   image: kindest/node:v1.35.1
-
-&#x20; - role: worker
-
-&#x20;   image: kindest/node:v1.35.1
+- role: worker
+  image: kindest/node:v1.35.0
 
 Create the cluster using the configuration file:
 
 
 
-kind create cluster --config kind-config.yaml --name tws-kind-cluster
+kind create cluster --config kind-config.yaml --name nks-cluster
 
-Verify the cluster:
+**Verify the cluster:**
 
 
 
